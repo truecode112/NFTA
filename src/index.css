@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'DM Serif Display', Arial, Serif;
+}
+
+a {
+  font: normal normal 16px 'DM Serif Display', Arial, serif;
+  font-family: 'DM Serif Display', Arial, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1280px) {
+  .wb-stl-heading1 {
+    font: normal normal 96px 'Playfair Display', Arial, serif;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 400;
+    color: #D6FADC;
+    text-decoration: none;
+    text-align: center;
+    line-height: 120px;
+    letter-spacing: 2px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-transform: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .wb-stl-heading1 {
+    font: normal normal 96px 'Playfair Display',Arial,serif;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 400;
+    color: #D6FADC;
+    text-decoration: none;
+    text-align: center;
+    line-height: 120px;
+    letter-spacing: 2px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-transform: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .wb-stl-heading1 {
+    font: normal normal 64px 'Playfair Display',Arial,serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    color: #D6FADC;
+    text-decoration: none;
+    text-align: center;
+    line-height: 80px;
+    letter-spacing: 2px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-transform: none;
+  }
+}
