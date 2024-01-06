@@ -8,6 +8,7 @@ import ONFA from "../../components/LandingPage/ONFA";
 import YNFA from "../../components/LandingPage/YNFA";
 import Media from "../../components/LandingPage/Media";
 import ContactUs from "../../components/LandingPage/ContactUs";
+import { ToastContainer } from "react-toastify";
 
 const LandingPage = () => {
   return (
@@ -24,7 +25,16 @@ const LandingPage = () => {
         <Media />
         <ContactUs />
       </div>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnFocusLoss={false}
+        closeOnClick
+        rtl={false}
+        theme="light"
+      />
     </>
   );
 }
