@@ -73,29 +73,28 @@ const RealArt = () => {
   // })
 
   const completeOrder = async () => {
+    if (orderID == '') return;
     const id = toast.loading('Processing...');
     try {
       console.log('completeOrder');
-      if (orderID != '') {
-        const payload = {
-          orderId: orderID
-        }
-        const res = await fetch(`${API_ENDPOINT}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (res.status == 200) {
-          const response = await res.json();
-          if (response.status == 'COMPLETED') {
-            toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: true });
-          } else {
-            toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: true });
-          }
+      const payload = {
+        orderId: orderID
+      }
+      const res = await fetch(`${API_ENDPOINT}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.status == 200) {
+        const response = await res.json();
+        if (response.status == 'COMPLETED') {
+          toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: true });
         } else {
-          const response = await res.json();
-          toast.update(id, { render: response.error, type: "error", isLoading: false, autoClose: true });
+          toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: true });
         }
+      } else {
+        const response = await res.json();
+        toast.update(id, { render: response.error, type: "error", isLoading: false, autoClose: true });
       }
     } catch (e) {
       console.error(e);
