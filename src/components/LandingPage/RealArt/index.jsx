@@ -41,51 +41,73 @@ const RealArt = () => {
     });
   }
 
-  const order_process = new Promise(async (resolve, reject) => {
+  // const order_process = new Promise(async (resolve, reject) => {
+  //   try {
+  //     console.log('order_process');
+  //     if (orderID != '') {
+  //       const payload = {
+  //         orderId: orderID
+  //       }
+  //       const res = await fetch(`${API_ENDPOINT}`, {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify(payload),
+  //       });
+  //       if (res.status == 200) {
+  //         const response = await res.json();
+  //         if (response.status == 'COMPLETED') {
+  //           console.log('resolve');
+  //           return resolve('Payment success!!!');
+  //         } else {
+  //           return reject(`Payment status ${response.status}`)
+  //         }
+  //       } else {
+  //         const response = await res.json();
+  //         return reject(response.error);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.error(e);
+  //     return reject(e);
+  //   }
+  // })
+
+  const completeOrder = async () => {
+    const id = toast.loading('Processing...');
     try {
-      const payload = {
-        orderId: orderID
-      }
-      const res = await fetch(`${API_ENDPOINT}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (res.status == 200) {
-        const response = await res.json();
-        if (response.status == 'COMPLETED') {
-          return resolve('Payment success!!!');
-        } else {
-          return reject(`Payment status ${response.status}`)
+      console.log('completeOrder');
+      if (orderID != '') {
+        const payload = {
+          orderId: orderID
         }
-      } else {
-        const response = await res.json();
-        return reject(response.error);
+        const res = await fetch(`${API_ENDPOINT}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.status == 200) {
+          const response = await res.json();
+          if (response.status == 'COMPLETED') {
+            toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: true });
+          } else {
+            toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: true });
+          }
+        } else {
+          const response = await res.json();
+          toast.update(id, { render: response.error, type: "error", isLoading: false, autoClose: true });
+        }
       }
     } catch (e) {
       console.error(e);
-      return reject(e);
+      toast.update(id, { render: e, type: "error", isLoading: false, autoClose: true });
     }
-  })
+  }
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async function (details) {
       setOpenModal(false);
       console.log('onApprove >>> ', details);
-      toast.promise(order_process,
-        {
-          pending: 'Processing...',
-          success: {
-            render({data}) {
-              return data
-            }
-          },
-          error: {
-            render({data}) {
-              return data
-            }
-          }
-        })
+      await completeOrder();
     });
   }
 
@@ -93,6 +115,15 @@ const RealArt = () => {
     setOpenModal(false);
     toast.error('Error occurred while processing payment')
     setErrorMessage("An Error occured with your payment ");
+  }
+
+  // const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const onClickBuy = async () => {
+    // const id = toast.loading('Processing...');
+    // await sleep(2000);
+    // toast.update(id, { render: "All is good", type: "success", isLoading: false, autoClose: true });
+    setOpenModal(true);
   }
 
   return (
@@ -138,7 +169,7 @@ const RealArt = () => {
             <div id="a18bd52bd91900c1ac3bedc2a6a69527" className="wb_element wb-layout-element" data-plugin="LayoutElement">
               <div className="wb_content wb-layout-horizontal">
                 <div id="a18bd52938ae003ee1c1e7d747a0e805" className="wb_element" data-plugin="Button">
-                  <button className="wb_button cursor-pointer" data-popup-processed="true" onClick={() => setOpenModal(true)}>
+                  <button className="wb_button cursor-pointer" data-popup-processed="true" onClick={onClickBuy}>
                     <div className="wrap_button">
                       <span>BUY</span>
                       <div className="subtext">
@@ -162,7 +193,7 @@ const RealArt = () => {
             <div id="a18c5bffe36e0099c6eeb3ec7739a6d8" className="wb_element wb-layout-element" data-plugin="LayoutElement">
               <div className="wb_content wb-layout-horizontal">
                 <div id="a18c5bffe372005cae6498f5bef6a65b" className="wb_element cursor-pointer" data-plugin="Button">
-                  <button className="wb_button cursor-pointer" onClick={() => setOpenModal(true)}>
+                  <button className="wb_button cursor-pointer" onClick={onClickBuy}>
                     <div className="wrap_button">
                       <span>BUY</span>
                       <div className="subtext">
