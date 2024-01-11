@@ -1,5 +1,5 @@
 
-const QA = () => {
+const Qa = () => {
   return (
     <div className="wb_element wb-layout-element min-h-0">
       <div className="wb_content wb-layout-vertical items-center" >
@@ -7,7 +7,7 @@ const QA = () => {
           <div className="wb-elm-line"></div>
         </div>
         <div id="a189d2c8dbb71ac4d561ecf5996003f4" className="wb_element wb_text_element leading-normal" data-plugin="TextArea">
-          <a name="qa" className="wb_anchor" data-popup-processed="true"></a>
+          <a className="wb_anchor" data-popup-processed="true"></a>
           <h1 className="wb-stl-heading1">
             <strong>Question and Answer</strong>
           </h1>
@@ -75,4 +75,4 @@ const QA = () => {
   )
 }
 
-export default QA;
+export default Qa;

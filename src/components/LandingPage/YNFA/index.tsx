@@ -1,10 +1,10 @@
 
-const YNFA = () => {
+const Ynfa = () => {
   return (
-    <section id="a189d2c8dbb910fd68e46dbcea9dd3a5" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
+    <section id="tokens" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
       <div className="wb_content wb-layout-vertical">
         <div id="a189d2c8dbb911869110aebb8304b9fa" className="wb_element wb_text_element leading-normal" data-plugin="TextArea">
-          <a name="token" className="wb_anchor" data-popup-processed="true"></a>
+          <a className="wb_anchor" data-popup-processed="true"></a>
           <h1 className="wb-stl-heading1"><strong>Your non-fungible art...</strong></h1>
         </div>
         <div id="a189d2c8dbb9128c01aa348eb4be7d6a" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
@@ -54,7 +54,7 @@ const YNFA = () => {
         </div>
       </div>
       <div id="a189d2c8dbb91c842343e851dc6a9c15" className="wb_element wb-elm-orient-horizontal w-full flex items-center" data-plugin="Line">
-        <a name="media" className="wb_anchor" data-popup-processed="true">
+        <a className="wb_anchor" data-popup-processed="true">
         </a>
         <div className="wb-elm-line w-4/5"></div>
       </div>
@@ -62,4 +62,4 @@ const YNFA = () => {
   )
 }
 
-export default YNFA;
+export default Ynfa;

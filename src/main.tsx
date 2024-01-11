@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -10,8 +10,7 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import {
-  WalletModalProvider,
-  WalletMultiButton,
+  WalletModalProvider
 } from "@solana/wallet-adapter-react-ui";
 import {
   // GlowWalletAdapter,
@@ -20,7 +19,11 @@ import {
   TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 
-const Context = ({ children }) => {
+interface Props {
+  children?: ReactNode
+}
+
+export const Context = ({ children }: Props) => {
   const network = "https://us-west-1.genesysgo.net/{YOUR_ACCOUNT_UUID_HERE}";
   const wallets = useMemo(
     () => [
@@ -29,7 +32,7 @@ const Context = ({ children }) => {
       // new SlopeWalletAdapter(),
       new TorusWalletAdapter(),
     ],
-    [network]
+    []
   );
 
   return (
@@ -50,7 +53,11 @@ const Context = ({ children }) => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
   <BrowserRouter>
     <Context>
       <App />

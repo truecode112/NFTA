@@ -46,7 +46,7 @@ const NFTACan = () => {
                 <div id="a18a32beeee30043a0d4bbd34117a517" className="wb_element wb-layout-element" data-plugin="LayoutElement">
                   <div className="wb_content wb-layout-vertical">
                     <div id="a18a32beeefd00bdce43492fbad7baf3" className="wb_element" data-plugin="Youtube">
-                      <iframe title="YouTube video player" className="youtube-player" allowFullScreen="" data-defer-load="Youtube" data-src="//www.youtube.com/embed/TtqxIy9olm0?controls=1" frameBorder="0">
+                      <iframe title="YouTube video player" className="youtube-player" allowFullScreen={true} data-defer-load="Youtube" data-src="//www.youtube.com/embed/TtqxIy9olm0?controls=1" frameBorder="0">
                       </iframe>
                     </div>
                   </div>
@@ -94,7 +94,7 @@ const NFTACan = () => {
                 </div>
                 <div id="a18ace4d619c009dda27aa52dcf0043a" className="wb_element wb-layout-element" data-plugin="LayoutElement">
                   <div className="wb_content wb-layout-vertical"><div id="a18ace4d61a1004cb6b65d30d3963102" className="wb_element" data-plugin="Youtube">
-                    <iframe title="YouTube video player" className="youtube-player" allowFullScreen="" data-defer-load="Youtube" data-src="//www.youtube.com/embed/H9-4mky3Q8c?controls=1" frameBorder="0">
+                    <iframe title="YouTube video player" className="youtube-player" allowFullScreen={true} data-defer-load="Youtube" data-src="//www.youtube.com/embed/H9-4mky3Q8c?controls=1" frameBorder="0">
                     </iframe>
                   </div>
                   </div>
@@ -145,7 +145,7 @@ const NFTACan = () => {
                     <div id="a18a32b5b63c000e499f18180e4c1e85" className="wb_element wb-layout-element" data-plugin="LayoutElement">
                       <div className="wb_content wb-layout-vertical">
                         <div id="a18a32b5f5520007588c49d4e06096f4" className="wb_element" data-plugin="Youtube">
-                          <iframe title="YouTube video player" className="youtube-player" allowFullScreen="" frameBorder="0" src="//www.youtube.com/embed/TtqxIy9olm0?controls=1">
+                          <iframe title="YouTube video player" className="youtube-player" allowFullScreen={true} frameBorder="0" src="//www.youtube.com/embed/TtqxIy9olm0?controls=1">
                           </iframe>
                         </div>
                       </div>
@@ -157,7 +157,7 @@ const NFTACan = () => {
                     <div id="a18ace476399001ee55885f0bd83deda" className="wb_element wb-layout-element" data-plugin="LayoutElement">
                       <div className="wb_content wb-layout-vertical">
                         <div id="a18ace47639d00790282d42c0d4b2065" className="wb_element" data-plugin="Youtube">
-                          <iframe title="YouTube video player" className="youtube-player" allowFullScreen="" frameBorder="0" src="//www.youtube.com/embed/H9-4mky3Q8c?controls=1">
+                          <iframe title="YouTube video player" className="youtube-player" allowFullScreen={true} frameBorder="0" src="//www.youtube.com/embed/H9-4mky3Q8c?controls=1">
                           </iframe>
                         </div>
                       </div>

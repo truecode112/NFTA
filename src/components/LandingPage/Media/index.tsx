@@ -79,7 +79,7 @@ const Media = () => {
       </div>
 
       <div id="a189d2c8dbb92937f41c20505df755f9" className="wb_element wb-elm-orient-horizontal" data-plugin="Line">
-        <a name="contact" className="wb_anchor" data-popup-processed="true"></a>
+        <a className="wb_anchor" data-popup-processed="true"></a>
         <div className="wb-elm-line">
         </div>
       </div>

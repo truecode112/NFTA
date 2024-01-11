@@ -7,7 +7,7 @@ const ContactUs = () => {
   const [message, setMessage] = useState('');
   
   return (
-    <section id="a189d2c8dbb92a496665b6547260111d" className="wb_element wb-layout-element" data-plugin="LayoutElement">
+    <section id="contact" className="wb_element wb-layout-element" data-plugin="LayoutElement">
       <div className="wb_content wb-layout-horizontal">
         <div id="a189d2c8dbb92bb95577b6dfd2029472" className="wb_element wb-layout-element" data-plugin="LayoutElement">
           <div className="wb_content wb-layout-horizontal">
@@ -20,7 +20,7 @@ const ContactUs = () => {
                   <div id="a189d2c8dbb92efb75796864385ac815_form" className="wb_form wb_vertical_form wb_form_ltr wb_form_vertical">
                     <input type="hidden" name="wb_form_id" value="215b176d" />
                     <input type="hidden" name="wb_form_uuid" value="e75104ec" />
-                    <textarea name="message" rows="3" cols="20" className="hpc" autoComplete="off">
+                    <textarea name="message" rows={3} cols={20} className="hpc" autoComplete="off">
                     </textarea>
                     <table>
                       <tbody>
@@ -28,7 +28,7 @@ const ContactUs = () => {
                           <th>Name<span className="text-danger">&nbsp;*</span></th>
                           <td><input type="hidden" name="wb_input_0" value="Name" />
                             <div>
-                              <input className="form-control form-field" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="" maxLength={255} name="wb_input_0" required="required" />
+                              <input className="form-control form-field" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="" maxLength={255} name="wb_input_0" required={true} />
                             </div>
                           </td>
                         </tr>
@@ -36,7 +36,7 @@ const ContactUs = () => {
                           <th>E-mail<span className="text-danger">&nbsp;*</span></th>
                           <td><input type="hidden" name="wb_input_1" value="E-mail" />
                             <div>
-                              <input className="form-control form-field" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" name="wb_input_1" required="required" />
+                              <input className="form-control form-field" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="" name="wb_input_1" required={true} />
                             </div>
                           </td>
                         </tr>
@@ -44,7 +44,7 @@ const ContactUs = () => {
                           <th>Message<span className="text-danger">&nbsp;*</span></th>
                           <td><input type="hidden" name="wb_input_2" value="Message" />
                             <div>
-                              <textarea className="form-control form-field form-area-field" rows="8" placeholder="" name="wb_input_2" required="required" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                              <textarea className="form-control form-field form-area-field" rows={8} placeholder="" name="wb_input_2" required={true} value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             </div>
                           </td>
                         </tr>

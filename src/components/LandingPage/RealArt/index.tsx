@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useEffect, useState } from 'react';
-import { Button, Modal } from 'flowbite-react';
+import { useState } from 'react';
+import { Modal } from 'flowbite-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { toast } from "react-toastify"
 
@@ -8,9 +9,12 @@ import { toast } from "react-toastify"
 const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
 const API_ENDPOINT = SERVER_URL + "/complete_order";
 
+const UNUSED = (unused: any) => {
+  console.log('Unused >>> ', unused);
+}
+
 const RealArt = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [ErrorMessage, setErrorMessage] = useState("");
   const [orderID, setOrderID] = useState('');
   const captureDetails = {
     description: 'NFTA Token',
@@ -20,16 +24,19 @@ const RealArt = () => {
     }
   }
 
-  const createOrder = (data, actions) => {
+  const createOrder = (data: any, actions: any) => {
+    UNUSED(data);
     return actions.order.create({
       purchase_units: [captureDetails]
-    }).then((orderID) => {
+    }).then((orderID: string) => {
       setOrderID(orderID);
       return orderID;
     })
   }
 
-  const onCancel = (data, actions) => {
+  const onCancel = (data: any, actions: any) => {
+    UNUSED(data);
+    UNUSED(actions);
     console.log('Payment cancelled');
     setOpenModal(false);
     toast.info("Payment cancelled", {
@@ -88,32 +95,33 @@ const RealArt = () => {
       if (res.status == 200) {
         const response = await res.json();
         if (response.status == 'COMPLETED') {
-          toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: true });
+          toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: 4000 });
         } else {
-          toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: true });
+          toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: 4000 });
         }
       } else {
         const response = await res.json();
-        toast.update(id, { render: response.error, type: "error", isLoading: false, autoClose: true });
+        toast.update(id, { render: response.error, type: "error", isLoading: false, autoClose: 4000 });
       }
     } catch (e) {
       console.error(e);
-      toast.update(id, { render: e, type: "error", isLoading: false, autoClose: true });
+      toast.update(id, { render: "Failed", type: "error", isLoading: false, autoClose: 4000 });
     }
   }
 
-  const onApprove = (data, actions) => {
-    return actions.order.capture().then(async function (details) {
+  const onApprove = (data: any, actions: any) => {
+    UNUSED(data);
+    return actions.order.capture().then(async function (details: any) {
       setOpenModal(false);
       console.log('onApprove >>> ', details);
       await completeOrder();
     });
   }
 
-  const onError = (data, actions) => {
+  const onError = (err: Record<string, unknown>) => {
+    UNUSED(err);
     setOpenModal(false);
     toast.error('Error occurred while processing payment')
-    setErrorMessage("An Error occured with your payment ");
   }
 
   // const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -126,7 +134,7 @@ const RealArt = () => {
   }
 
   return (
-    <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
+    <PayPalScriptProvider options={{ clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
       <section
         id="realart"
         className="flex justify-center items-center flex-col">
@@ -156,9 +164,9 @@ const RealArt = () => {
                   <p>&nbsp;</p>
 
                   <h5 className="wb-stl-custom14">
-                    <font color="#efedff">
+                    <p style={{ color: '#efedff' }}>
                       The 2024 Non Fungible Art Token (NFA)
-                    </font>
+                    </p>
                     <br />
                     <em>limited supply, minted on Solana, all tokens backed by real art!</em>
                   </h5>
@@ -267,7 +275,7 @@ const RealArt = () => {
                   </h5>
                   <h5 className="wb-stl-custom14">
                     <span className="text-[36px]">
-                      <font color="#efedff">THE NFTA TO BACK ALL (My Precious)</font>
+                      <p style={{ color: '#efedff' }}>THE NFTA TO BACK ALL (My Precious)</p>
                     </span><br />
                     <em>head-to-head with Bitcoin, all tokens backed by real art!</em></h5>
                   <h5 className="wb-stl-custom14">

@@ -1,4 +1,5 @@
-const ONFA = () => {
+
+const Onfa = () => {
   return (
     <div id="a189d2c8dbb82af19daefa978723e705" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
       <div className="wb_content wb-layout-vertical">
@@ -77,4 +78,4 @@ const ONFA = () => {
   )
 };
 
-export default ONFA;
+export default Onfa;

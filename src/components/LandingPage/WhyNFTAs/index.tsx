@@ -1,10 +1,10 @@
 
 const WhyNFTA = () => {
   return (
-    <section id="a189d2c8dbb8060a8535c00f6860dcd6" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
+    <section id="nftas" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
       <div className="wb_content wb-layout-vertical">
         <div id="a189d2c8dbb807dd4a6919ba2e365541" className="wb_element wb_text_element leading-normal" data-plugin="TextArea">
-          <a name="nftas" className="wb_anchor" data-popup-processed="true"></a>
+          <a className="wb_anchor" data-popup-processed="true"></a>
           <h1 className="wb-stl-heading1"><strong>Why NFTAs: Where NFTs and tokens went wrong...</strong></h1>
         </div>
         <div id="a189d2c8dbb808624faf96300a278145" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
@@ -18,7 +18,7 @@ const WhyNFTA = () => {
             <div id="a189d2c8dbb80aee86a07df06420d871" className="wb_element wb-anim wb-anim-fade-in-none wb-layout-element" data-plugin="LayoutElement">
               <div className="wb_content wb-layout-vertical">
                 <div id="a189d2c8dbb80bb8d98e1be87e242108" className="wb_element wb_text_element leading-normal" data-plugin="TextArea">
-                  <h5 className="wb-stl-custom11" style={{ textAlign: 'center ' }}><strong>What is an NFT?</strong></h5>
+                  <h5 className="wb-stl-custom11" style={{ textAlign: 'center' }}><strong>What is an NFT?</strong></h5>
                 </div>
                 <div id="a189d2c8dbb80cb6f6de848ce4570607" className="wb_element wb_text_element leading-normal" data-plugin="TextArea">
                   <p className="wb-stl-normal">A non-fungible token (NFT) is&nbsp;a one-of-a-kind digital sequence. It is similar to the DNA sequence of any person. Every individual has their own unique sequence. Like an individual, the digital sequence of an object is its unique&nbsp;makeup&nbsp;(called metadata).&nbsp; The process to put that digital sequence on a computer system <u>as one whole item</u> is called "minting". Once the sequence&nbsp;is minted, the newly created and minted&nbsp;item is called a "token". The minted token is referred to as "non fungible"&nbsp;to show that it can't be duplicated or divided...it's just one unique makeup of metadata.&nbsp;</p>
