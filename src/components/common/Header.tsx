@@ -1,9 +1,29 @@
 import logo from '/imgs/Orginal_inverse_Green_j_small-ts1700073248.jpg';
 import { Link } from 'react-router-dom'
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { PublicKey, Connection } from "@solana/web3.js";
+import {  useWallet } from "@solana/wallet-adapter-react";
+import { useEffect } from 'react';
 
 const Header = () => {
+  const rpc = "https://rpc.helius.xyz/?api-key=409065f8-dc1f-4997-8124-f70ae2b2b870";
+  const connection = new Connection(rpc, "confirmed");
+  const wallet = useWallet();
+
+  useEffect(() => {
+		(async () => {
+			if (wallet) {
+				console.log(wallet.publicKey);
+			}
+		})();
+	}, [wallet.connected])
+
   return (
     <header className="w-full font-['NanumGothic'] flex flex-col justify-center items-center bg-primary pt-10">
+      <div className='w-10/12 flex mt-2 justify-end'>
+        <WalletMultiButton />
+      </div>
+      
       <div className='w-50'>
         <img
           src={logo}
