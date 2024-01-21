@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState } from 'react';
-import { Modal } from 'flowbite-react';
+import { useState, useRef } from 'react';
+import { Modal, TextInput, Button, Label } from 'flowbite-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { toast } from "react-toastify"
 
@@ -15,12 +15,39 @@ const UNUSED = (unused: any) => {
 
 const RealArt = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openInputModal, setOpenInputModal] = useState(false);
   const [orderID, setOrderID] = useState('');
-  const captureDetails = {
-    description: 'NFTA Token',
-    amount: {
-      currency_code: 'USD',
-      value: '20.00',
+  const [tokenAmount, setTokenAmount] = useState('');
+  const [isValidAmount, setIsValidAmount] = useState(false);
+  const [tokenRealAmount, setTokenRealAmount] = useState(0.0);
+  const [captureDetails, setCaptureDetails] = useState({});
+  const amountRef = useRef<HTMLInputElement>(null);
+
+  const tokenPrice: number = 0.5;
+
+  const onClickPay = () => {
+    const payAmount = tokenRealAmount * tokenPrice;
+    setCaptureDetails({
+      description: 'NFTA Token',
+      amount: {
+        currency_code: 'USD',
+        value: payAmount.toFixed(2),
+      } 
+    });
+    setOpenInputModal(false);
+    setOpenModal(true);
+  }
+
+  const onChangeAmount = (event: any) => {
+    // setTokenAmount(event.target.value);
+    const amount = parseFloat(event.target.value);
+    if (isNaN(amount)) {
+      setIsValidAmount(false);
+      setTokenAmount('');
+    } else {
+      setIsValidAmount(true);
+      setTokenAmount(amount.toString());
+      setTokenRealAmount(amount);
     }
   }
 
@@ -130,7 +157,8 @@ const RealArt = () => {
     // const id = toast.loading('Processing...');
     // await sleep(2000);
     // toast.update(id, { render: "All is good", type: "success", isLoading: false, autoClose: true });
-    setOpenModal(true);
+    // setOpenModal(true);
+    setOpenInputModal(true);
   }
 
   return (
@@ -331,6 +359,29 @@ const RealArt = () => {
                 onCancel={onCancel}
                 onError={onError}
               />
+            </div>
+          </Modal.Body>
+        </Modal>
+
+        <Modal dismissible show={openInputModal} onClose={() => setOpenInputModal(false)} size={'md'} initialFocus={amountRef}>
+          <Modal.Header>Input token amount</Modal.Header>
+          <Modal.Body >
+            <div className='mb-2'>
+              <Label value={`1 NFA token = ${tokenPrice}USD`} className=''/>
+            </div>
+            <div>
+              <TextInput
+                id="amount"
+                placeholder='Token amount'
+                value={tokenAmount}
+                onChange={onChangeAmount}
+                inputMode='decimal'
+                ref={amountRef}
+                required
+              />
+              <div className='w-full mt-2'>
+                <Button disabled={!isValidAmount} onClick={onClickPay}>{isValidAmount ? `Pay ${(tokenRealAmount * tokenPrice).toFixed(2)}$` : `Pay 0.0$`}</Button>
+              </div>
             </div>
           </Modal.Body>
         </Modal>
