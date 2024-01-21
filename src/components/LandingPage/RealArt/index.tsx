@@ -5,8 +5,8 @@ import { Modal, TextInput, Button, Label } from 'flowbite-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { toast } from "react-toastify"
 
-// const SERVER_URL = "http://localhost:4567"
-const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
+const SERVER_URL = "http://localhost:4567"
+// const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
 const API_ENDPOINT = SERVER_URL + "/complete_order";
 
 const UNUSED = (unused: any) => {
@@ -16,7 +16,6 @@ const UNUSED = (unused: any) => {
 const RealArt = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openInputModal, setOpenInputModal] = useState(false);
-  const [orderID, setOrderID] = useState('');
   const [tokenAmount, setTokenAmount] = useState('');
   const [isValidAmount, setIsValidAmount] = useState(false);
   const [tokenRealAmount, setTokenRealAmount] = useState(0.0);
@@ -56,7 +55,6 @@ const RealArt = () => {
     return actions.order.create({
       purchase_units: [captureDetails]
     }).then((orderID: string) => {
-      setOrderID(orderID);
       return orderID;
     })
   }
@@ -106,7 +104,7 @@ const RealArt = () => {
   //   }
   // })
 
-  const completeOrder = async () => {
+  const completeOrder = async (orderID: string) => {
     if (orderID == '') return;
     const id = toast.loading('Processing...');
     try {
@@ -141,7 +139,7 @@ const RealArt = () => {
     return actions.order.capture().then(async function (details: any) {
       setOpenModal(false);
       console.log('onApprove >>> ', details);
-      await completeOrder();
+      await completeOrder(details.id);
     });
   }
 
