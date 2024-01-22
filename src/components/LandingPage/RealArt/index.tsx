@@ -49,9 +49,7 @@ const RealArt = () => {
 
   const onChangeAmount = (event: any) => {
     // setTokenAmount(event.target.value);
-    console.log(event.target.value);
     const amount = parseFloat(event.target.value);
-    console.log(amount);
     if (isNaN(amount)) {
       setIsValidAmount(false);
       setTokenAmount('');
