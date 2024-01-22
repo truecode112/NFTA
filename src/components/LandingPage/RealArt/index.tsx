@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Modal, TextInput, Button, Label } from 'flowbite-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { toast } from "react-toastify"
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const SERVER_URL = "http://localhost:4567"
 // const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
@@ -21,10 +22,15 @@ const RealArt = () => {
   const [tokenRealAmount, setTokenRealAmount] = useState(0.0);
   const [captureDetails, setCaptureDetails] = useState({});
   const amountRef = useRef<HTMLInputElement>(null);
+  const wallet = useWallet();
 
   const tokenPrice: number = 0.5;
 
   const onClickPay = () => {
+    if (wallet.publicKey === null) {
+      toast.error('Please connect wallet!');
+      return;
+    }
     const payAmount = tokenRealAmount * tokenPrice;
     setCaptureDetails({
       description: 'NFTA Token',
@@ -106,11 +112,13 @@ const RealArt = () => {
 
   const completeOrder = async (orderID: string) => {
     if (orderID == '') return;
+    if (wallet.publicKey === null) return;
     const id = toast.loading('Processing...');
     try {
       console.log('completeOrder');
       const payload = {
-        orderId: orderID
+        orderId: orderID,
+        walletAddress: wallet.publicKey.toString()
       }
       const res = await fetch(`${API_ENDPOINT}`, {
         method: 'POST',
