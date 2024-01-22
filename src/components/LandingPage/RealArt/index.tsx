@@ -5,9 +5,9 @@ import { Modal, TextInput, Button, Label } from 'flowbite-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { toast } from "react-toastify"
 import { useWallet } from '@solana/wallet-adapter-react';
-
-const SERVER_URL = "http://localhost:4567"
-// const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
+import SuccessIcon from '/icon-success.svg';
+// const SERVER_URL = "http://localhost:4567"
+const SERVER_URL = "https://dev.goodmealtime.com/nfta-api"
 const API_ENDPOINT = SERVER_URL + "/complete_order";
 
 const UNUSED = (unused: any) => {
@@ -25,6 +25,10 @@ const RealArt = () => {
   const wallet = useWallet();
 
   const tokenPrice: number = 0.5;
+
+  const [txHash, setTxHash] = useState('');
+  const [tokenSentAmount, setTokenSentAmount] = useState(0.0);
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
   const onClickPay = () => {
     if (wallet.publicKey === null) {
@@ -45,13 +49,15 @@ const RealArt = () => {
 
   const onChangeAmount = (event: any) => {
     // setTokenAmount(event.target.value);
+    console.log(event.target.value);
     const amount = parseFloat(event.target.value);
+    console.log(amount);
     if (isNaN(amount)) {
       setIsValidAmount(false);
       setTokenAmount('');
     } else {
       setIsValidAmount(true);
-      setTokenAmount(amount.toString());
+      setTokenAmount(event.target.value);
       setTokenRealAmount(amount);
     }
   }
@@ -127,10 +133,13 @@ const RealArt = () => {
       });
       if (res.status == 200) {
         const response = await res.json();
-        if (response.status == 'COMPLETED') {
-          toast.update(id, { render: "Payment success", type: "success", isLoading: false, autoClose: 4000 });
+        if (response.status == 'success') {
+          toast.update(id, { render: "Success!", type: "success", isLoading: false, autoClose: 2000 });
+          setTxHash(response.data.txHash);
+          setTokenSentAmount(response.data.tokenAmount);
+          setOpenSuccessModal(true);
         } else {
-          toast.update(id, { render: `Payment status is ${response.status}`, type: "info", isLoading: false, autoClose: 4000 });
+          toast.update(id, { render: response.error, type: "info", isLoading: false, autoClose: 4000 });
         }
       } else {
         const response = await res.json();
@@ -164,6 +173,7 @@ const RealArt = () => {
     // await sleep(2000);
     // toast.update(id, { render: "All is good", type: "success", isLoading: false, autoClose: true });
     // setOpenModal(true);
+    // setOpenSuccessModal(true)
     setOpenInputModal(true);
   }
 
@@ -365,6 +375,20 @@ const RealArt = () => {
                 onCancel={onCancel}
                 onError={onError}
               />
+            </div>
+          </Modal.Body>
+        </Modal>
+
+        <Modal dismissible show={openSuccessModal} onClose={() => setOpenSuccessModal(false)} popup>
+          <Modal.Header />
+          <Modal.Body>
+            <div className="flex flex-col justify-center items-center">
+              <img src={SuccessIcon} width={48}></img>
+              <p className='font-bold w-full text-center text-xl mt-4'>{`Sent ${tokenSentAmount} SOLAR`}</p>
+              <a href={txHash} target='_blank' className='w-full break-all mt-4 underline decoration-blue-600 text-blue-600' style={{font: 'unset'}}>{txHash}</a>
+              <Button className='w-48 mt-4' color="green" onClick={() => setOpenSuccessModal(false)}>
+                {"OK"}
+              </Button>
             </div>
           </Modal.Body>
         </Modal>
