@@ -408,7 +408,7 @@ const RealArt = () => {
                 required
               />
               <div className='w-full mt-2'>
-                <Button disabled={!isValidAmount} onClick={onClickPay}>{isValidAmount ? `Pay ${(tokenRealAmount * tokenPrice).toFixed(2)}$` : `Pay 0.0$`}</Button>
+                <Button disabled={!isValidAmount} onClick={onClickPay}>{isValidAmount ? `Pay $${(tokenRealAmount * tokenPrice).toFixed(2)}` : `Pay $0.0`}</Button>
               </div>
             </div>
           </Modal.Body>
